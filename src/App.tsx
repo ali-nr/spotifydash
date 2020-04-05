@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Router } from '@reach/router';
 import './App.css';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { Login } from './Login';
+import { Dashboard } from './Dashboard';
+import overrides from './overrides';
+import './index.scss';
 
-const App = () => {
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Lato',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif'
+    ].join(',')
+  },
+  overrides
+});
+
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Login path="/"></Login>
+        <Dashboard path="dashboard"></Dashboard>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
